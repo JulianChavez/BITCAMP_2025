@@ -16,12 +16,12 @@ class ArticleSummarizer:
         ])
         
         # Create the prompt for GPT-4
-        prompt = f"""Create a 6-8 minute podcast script (1000-1200 words), not including the title and description and host names. The word count will be base on what the host says.
+        prompt = f"""Create a 1-2 minute podcast script (200-300 words), not including the title and description and host names. The word count will be base on what the host says.
           summarizing the following news articles about {category}.
         The script should be in a conversational format between two hosts, Host A and Host B.
         Make it engaging and include 1-2 sentences of analysis or implications for each major point.
-        Format the output as a script with clear speaker labels.
-        
+        Format the output as a script with clear speaker labels. Format the script with no markdown.
+        Have the first line be "Host A" that will be describing the title and whats happening.
         Articles to summarize:
         {articles_content}
         

@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from news_api import NewsAPI
 from summarizer import ArticleSummarizer
-
+from elevenLabs import ElevenLabs
 app = Flask(__name__)
 CORS(app)
 
@@ -33,6 +33,8 @@ def summarize_articles():
             return jsonify({'error': 'Articles and category are required'}), 400
             
         summary = summarizer.generate_podcast_script(articles, category)
+        elevenlabs = ElevenLabs(summary)
+        elevenlabs.create_conversation("podcast_output.mp3")
         if summary:
             return jsonify({'summary': summary})
         return jsonify({'error': 'Failed to generate summary'}), 500
