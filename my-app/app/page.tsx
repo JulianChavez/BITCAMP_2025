@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import ScrapeButton from '@/components/ScrapeButton';
 
 const categories = [
   'business',
@@ -76,14 +77,17 @@ export default function Home() {
                   {article.title}
                 </h2>
                 <p className="text-gray-600 mb-4">{article.description}</p>
-                <a
-                  href={article.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 hover:text-blue-700"
-                >
-                  Read more →
-                </a>
+                <div className="flex items-center gap-4">
+                  <a
+                    href={article.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:text-blue-700"
+                  >
+                    Read more →
+                  </a>
+                  <ScrapeButton articleUrl={article.url} />
+                </div>
               </div>
             ))}
           </div>
