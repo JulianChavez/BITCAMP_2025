@@ -56,6 +56,13 @@ export default function Home() {
       const data = await response.json();
       if (data.summary) {
         setSummary(data.summary);
+        if (data.cached) {
+          console.log('Using cached summary');
+          alert('Using cached summary (generated within last 10 minutes)');
+        } else {
+          console.log('Generated new summary');
+          alert('Generated new summary');
+        }
       }
     } catch (error) {
       console.error('Error generating summary:', error);

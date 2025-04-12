@@ -8,9 +8,11 @@ load_dotenv()
 
 API_KEY = os.getenv('ELEVENLABS_API_KEY')
 VOICE_IDS = {
-    "Host A": "pwMBn0SsmN1220Aorv15",
+    "Host A": "2BJW5coyhAzSr8STdHbE",
     "Host B": "UgBBYS2sOqTuMpoF3BR0"
 }
+# Host B: Mark
+# Host A: Edward
 
 
 class ElevenLabs:

@@ -3,11 +3,14 @@ from flask_cors import CORS
 from news_api import NewsAPI
 from summarizer import ArticleSummarizer
 from elevenLabs import ElevenLabs
+from s3_cache import S3CacheManager
+
 app = Flask(__name__)
 CORS(app)
 
 news_api = NewsAPI()
 summarizer = ArticleSummarizer()
+cache_manager = S3CacheManager()
 
 @app.route('/api/news', methods=['GET'])
 def get_news():
@@ -31,12 +34,20 @@ def summarize_articles():
         
         if not articles or not category:
             return jsonify({'error': 'Articles and category are required'}), 400
+        
+        # Check cache first
+        cached_summary = cache_manager.get_cached_summary(category)
+        if cached_summary:
+            return jsonify({'summary': cached_summary, 'cached': True})
             
+        # Generate new summary if not in cache
         summary = summarizer.generate_podcast_script(articles, category)
-        elevenlabs = ElevenLabs(summary)
-        elevenlabs.create_conversation("podcast_output.mp3")
         if summary:
-            return jsonify({'summary': summary})
+            # Cache the new summary
+            cache_manager.cache_summary(category, summary)
+            elevenlabs = ElevenLabs(summary)
+            elevenlabs.create_conversation("podcast_output.mp3")
+            return jsonify({'summary': summary, 'cached': False})
         return jsonify({'error': 'Failed to generate summary'}), 500
     except Exception as e:
         return jsonify({'error': str(e)}), 500
