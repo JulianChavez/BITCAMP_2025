@@ -8,12 +8,17 @@ load_dotenv()
 
 API_KEY = os.getenv('ELEVENLABS_API_KEY')
 VOICE_IDS = {
-    "Host A": "2BJW5coyhAzSr8STdHbE",
-    "Host B": "UgBBYS2sOqTuMpoF3BR0"
+    "Host A": "03vEurziQfq3V8WZhQvn",
+    "Host B": "V33LkP9pVLdcjeB2y5Na"
 }
-# Host  Mark : UgBBYS2sOqTuMpoF3BR0 
-# Host Edward : 2BJW5coyhAzSr8STdHbE
+# Host  Mark : UgBBYS2sOqTuMpoF3BR0 HOST B
+# Host Edward : 2BJW5coyhAzSr8STdHbE HOST A
 # Host Juinper: aMSt68OGf4xUZAnLpTU8
+# Host ARISITA: 03vEurziQfq3V8WZhQvn | Funny 
+# HOST MICKEY: dfZGXKiIzjizWtJ0NgPy | funny dfZGXKiIzjizWtJ0NgPy
+# HOST squuel: 342hpGp7PKo7DsTTVSdr | funny
+# HOST maverick: V33LkP9pVLdcjeB2y5Na | funnny
+# host herbie: Kz0DA4tCctbPjLay2QT1 | funny
 
 
 class ElevenLabs:
