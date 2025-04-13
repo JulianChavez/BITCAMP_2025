@@ -35,6 +35,7 @@ export default function Home() {
   const [topic, setTopic] = useState('');
   const [exploration, setExploration] = useState('');
   const [isExploring, setIsExploring] = useState(false);
+  const [mode, setMode] = useState<'normal' | 'funny'>('normal');
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -68,6 +69,7 @@ export default function Home() {
         body: JSON.stringify({
           articles: news,
           category: selectedCategory,
+          mode: mode,
         }),
       });
       
@@ -173,6 +175,19 @@ export default function Home() {
             }`}
           >
             Explore Topic
+          </button>
+        </div>
+
+        <div className="flex justify-center mb-8">
+          <button
+            onClick={() => setMode(mode === 'normal' ? 'funny' : 'normal')}
+            className={`px-4 py-2 rounded-lg mr-4 ${
+              mode === 'normal' 
+                ? 'bg-blue-500 text-white' 
+                : 'bg-yellow-500 text-white'
+            }`}
+          >
+            {mode === 'normal' ? 'Normal Mode' : 'Funny Mode'}
           </button>
         </div>
 

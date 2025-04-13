@@ -60,13 +60,15 @@ def summarize_articles():
         data = request.get_json()
         articles = data.get('articles', [])
         category = data.get('category', '')
+        mode = data.get('mode', 'normal')  # Default to normal mode
         
         if not articles or not category:
             return jsonify({'error': 'Articles and category are required'}), 400
         
         # Check cache first
-        cached_summary = cache_manager.get_cached_summary(category)
-        audio_url = cache_manager.get_audio_url(category)
+        cache_key = f"{category}_{mode}"  # Include mode in cache key
+        cached_summary = cache_manager.get_cached_summary(cache_key)
+        audio_url = cache_manager.get_audio_url(cache_key)
         
         if cached_summary and audio_url:
             return jsonify({
@@ -76,19 +78,19 @@ def summarize_articles():
             })
             
         # Generate new summary if not in cache
-        summary = summarizer.generate_podcast_script(articles, category)
+        summary = summarizer.generate_podcast_script(articles, category, mode)
         if summary:
             # Generate audio
             elevenlabs = ElevenLabs(summary)
-            audio_file = f"podcast_output_{category}.mp3"
+            audio_file = f"podcast_output_{category}_{mode}.mp3"
             elevenlabs.create_conversation(audio_file)
             
             # Cache both summary and audio
-            cache_manager.cache_summary(category, summary)
-            cache_manager.cache_audio(category, audio_file)
+            cache_manager.cache_summary(cache_key, summary)
+            cache_manager.cache_audio(cache_key, audio_file)
             
             # Get the new audio URL
-            audio_url = cache_manager.get_audio_url(category)
+            audio_url = cache_manager.get_audio_url(cache_key)
             
             # Clean up local audio file
             if os.path.exists(audio_file):
