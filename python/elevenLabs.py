@@ -11,8 +11,9 @@ VOICE_IDS = {
     "Host A": "2BJW5coyhAzSr8STdHbE",
     "Host B": "UgBBYS2sOqTuMpoF3BR0"
 }
-# Host B: Mark
-# Host A: Edward
+# Host  Mark : UgBBYS2sOqTuMpoF3BR0 
+# Host Edward : 2BJW5coyhAzSr8STdHbE
+# Host Juinper: aMSt68OGf4xUZAnLpTU8
 
 
 class ElevenLabs:

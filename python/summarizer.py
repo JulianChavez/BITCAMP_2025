@@ -21,8 +21,9 @@ class ArticleSummarizer:
         The script should be in a conversational format between two hosts, Host A and Host B.
         Make it engaging and include 1-2 sentences of analysis or implications for each major point.
         Format the output as a script with clear speaker labels. Format the script with no markdown.
-        Have the first line be "Host A" that will be describing the title and whats happening. When a Host is going to speak
-        about the other host, use "Edward" for host A and "Mark" for host B.
+        Have the first line be "Host A" that will be describing the title and whats happening.  When a Host is going to speak
+        about the other host, use "Edward" for host A and "Mark" for host B.If the host is going to scream or laugh with using all caps, exclamation marks, and phonotic language.
+        Do not add symbols like * or # in the script. Don't have the host's name in the script when they are speaking.
         Articles to summarize:
         {articles_content}
         
